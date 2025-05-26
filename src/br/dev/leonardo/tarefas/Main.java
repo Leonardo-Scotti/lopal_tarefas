@@ -6,18 +6,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.UUID;
 
+import br.dev.leonardo.tarefas.dao.FuncionarioDAO;
 import br.dev.leonardo.tarefas.model.Funcionario;
+import br.dev.leonardo.tarefas.ui.FrameFuncionario;
+import br.dev.leonardo.tarefas.utils.Utils;
 
 public class Main {
-	private static String path = "c:\\Users\\25132821\\ProjetoTarefas\\tarefas.txt";
+	private static String path = "c:\\Users\\25132821\\ProjetoTarefas\\tarefas.csv";
 
 	public static void main(String[] args) {
-		Funcionario funcionario1 = new Funcionario();
-		Funcionario funcionario2 = new Funcionario("Leonardo");
-		Funcionario funcionario3 = new Funcionario("Programador", "Leonardo");
-		Funcionario funcionario4 = new Funcionario("Programador", "Leonardo", 2);
 		
+
+	
+	new FrameFuncionario();
 		
 	}
 	
