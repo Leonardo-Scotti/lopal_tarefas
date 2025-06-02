@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.dev.leonardo.tarefas.dao.FuncionarioDAO;
@@ -27,18 +27,19 @@ public class FrameFuncionario {
 	private JButton btnSalvar;	
 	private JButton btnSair;
 	
-	public FrameFuncionario() {
-		criarTela();
+	public FrameFuncionario(JFrame jf) {
+		criarTela(jf);
+		
 	}
 	
-	private void criarTela() {
-		JFrame tela = new JFrame();
+	private void criarTela(JFrame jf) {
+		JDialog tela = new JDialog(jf, true);
 		tela.setTitle("Cadastro");
 		tela.setSize(400, 400);
 		tela.setResizable(false);
-		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tela.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		tela.setLayout(null);
-		tela.setLocationRelativeTo(null);
+		tela.setLocationRelativeTo(jf);
 		
 		Container painel = tela.getContentPane();
 		
@@ -115,10 +116,10 @@ public class FrameFuncionario {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				int resposta = JOptionPane.showConfirmDialog(tela, "Você tem certeza que deseja fechar a aplicação?");
+				int resposta = JOptionPane.showConfirmDialog(tela, "Você tem certeza que deseja sair do cadastro?");
 				
 				if (resposta == 0) {
-					System.exit(JFrame.EXIT_ON_CLOSE);
+					tela.dispose();
 				}
 				
 			}
