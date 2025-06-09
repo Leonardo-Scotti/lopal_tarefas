@@ -4,24 +4,29 @@ import java.time.LocalDate;
 
 import br.dev.leonardo.tarefas.utils.Utils;
 
-public class Tarefas {
+public class Tarefa {
 	private String tituloTarefa;
 	private String descricaoTarefa;
-	private LocalDate dataInicial;
+	private String dataInicial;
 	private int prazoTarefa;
-	private LocalDate dataConclusao;
-	private Status statusTarefa;
-	private Funcionario responsavelTarefa;
-	private int código;
+	private String dataConclusao;
+	private String statusTarefa;
+	private String responsavelTarefa;
+	private String código;
 	
-	public void Tarefas(String tituloTarefa, String descricaoTarefa, LocalDate dataInicial, int prazoTarefa, Status statusTarefa, Funcionario responsavelTarefa) {
+	public Tarefa() {
+		
+	}
+	
+	public Tarefa(String tituloTarefa, String descricaoTarefa, LocalDate dataInicial, int prazoTarefa, String statusTarefa, String responsavelTarefa) {
 		this.tituloTarefa = tituloTarefa;
 		this.descricaoTarefa = descricaoTarefa;
-		this.dataInicial = dataInicial;
+		this.dataInicial = dataInicial.toString();
 		this.prazoTarefa = prazoTarefa;
 		this.statusTarefa = statusTarefa;
 		this.responsavelTarefa = responsavelTarefa;
 		this.código = Utils.gerarUUID8();
+		this.dataConclusao = dataInicial.plusDays(prazoTarefa).toString();
 	}
 	
 	
@@ -41,11 +46,11 @@ public class Tarefas {
 		this.descricaoTarefa = descricaoTarefa;
 	}
 
-	public LocalDate getDataInicial() {
+	public String getDataInicial() {
 		return dataInicial;
 	}
 
-	public void setDataInicial(LocalDate dataInicial) {
+	public void setDataInicial(String dataInicial) {
 		this.dataInicial = dataInicial;
 	}
 
@@ -57,28 +62,34 @@ public class Tarefas {
 		this.prazoTarefa = prazoTarefa;
 	}
 
-	public LocalDate getDataConclusao() {
+	public String getDataConclusao() {
 		return dataConclusao;
 	}
 
-	public void setDataConclusao(LocalDate dataConclusao) {
+	public void setDataConclusao(String dataConclusao) {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public Status getStatusTarefa() {
+	public String getStatusTarefa() {
 		return statusTarefa;
 	}
 
-	public void setStatusTarefa(Status statusTarefa) {
+	public void setStatusTarefa(String statusTarefa) {
 		this.statusTarefa = statusTarefa;
 	}
 
-	public Funcionario getResponsavelTarefa() {
+	public String getResponsavelTarefa() {
 		return responsavelTarefa;
 	}
 
-	public void setResponsavelTarefa(Funcionario responsavelTarefa) {
+	public void setResponsavelTarefa(String responsavelTarefa) {
 		this.responsavelTarefa = responsavelTarefa;
+	}
+	
+	@Override
+	public String toString() {
+		String tarefa = tituloTarefa + "," + descricaoTarefa + "," + dataInicial + "," + prazoTarefa + "," + dataConclusao + "," + statusTarefa + "," + responsavelTarefa + "," + código;
+		return tarefa;
 	}
 
 }
