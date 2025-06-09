@@ -27,19 +27,19 @@ public class FrameFuncionario {
 	private JButton btnSalvar;	
 	private JButton btnSair;
 	
-	public FrameFuncionario(JFrame jf) {
-		criarTela(jf);
+	public FrameFuncionario(JDialog jd) {
+		criarTela(jd);
 		
 	}
 	
-	private void criarTela(JFrame jf) {
-		JDialog tela = new JDialog(jf, true);
+	private void criarTela(JDialog jd) {
+		JDialog tela = new JDialog(jd, true);
 		tela.setTitle("Cadastro");
 		tela.setSize(400, 400);
 		tela.setResizable(false);
 		tela.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		tela.setLayout(null);
-		tela.setLocationRelativeTo(jf);
+		tela.setLocationRelativeTo(jd);
 		
 		Container painel = tela.getContentPane();
 		

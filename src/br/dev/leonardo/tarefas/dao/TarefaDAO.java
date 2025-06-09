@@ -11,6 +11,10 @@ import br.dev.leonardo.tarefas.model.Tarefa;
 public class TarefaDAO {
 	private Tarefa tarefa;
 
+	public TarefaDAO() {
+		
+	}
+	
 	public TarefaDAO(Tarefa tarefa) {
 		this.tarefa = tarefa;
 	}

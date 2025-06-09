@@ -12,7 +12,7 @@ public class Tarefa {
 	private String dataConclusao;
 	private String statusTarefa;
 	private String responsavelTarefa;
-	private String código;
+	private String codigo;
 	
 	public Tarefa() {
 		
@@ -25,10 +25,13 @@ public class Tarefa {
 		this.prazoTarefa = prazoTarefa;
 		this.statusTarefa = statusTarefa;
 		this.responsavelTarefa = responsavelTarefa;
-		this.código = Utils.gerarUUID8();
+		this.codigo = Utils.gerarUUID8();
 		this.dataConclusao = dataInicial.plusDays(prazoTarefa).toString();
 	}
 	
+	public String getCodigo() {
+		return codigo;
+	}
 	
 	public String getTituloTarefa() {
 		return tituloTarefa;
@@ -88,7 +91,7 @@ public class Tarefa {
 	
 	@Override
 	public String toString() {
-		String tarefa = tituloTarefa + "," + descricaoTarefa + "," + dataInicial + "," + prazoTarefa + "," + dataConclusao + "," + statusTarefa + "," + responsavelTarefa + "," + código;
+		String tarefa = tituloTarefa + "," + descricaoTarefa + "," + dataInicial + "," + prazoTarefa + "," + dataConclusao + "," + statusTarefa + "," + responsavelTarefa + "," + codigo;
 		return tarefa;
 	}
 

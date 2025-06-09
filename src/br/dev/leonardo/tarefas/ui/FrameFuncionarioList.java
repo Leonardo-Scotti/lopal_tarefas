@@ -7,8 +7,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,20 +22,21 @@ public class FrameFuncionarioList {
 
 	private JLabel labelTitulo;
 	private JButton btnCadastro;
+	private JButton btnSair;
 	private JTable tabelaFuncionarios;
 	private JScrollPane scrollFuncionarios;
 	private DefaultTableModel modelFuncionarios;
 	private String[] colunas = { "CÓDIGO", "NOME", "CARGO" };
 
-	public FrameFuncionarioList() {
-		criarTela();
+	public FrameFuncionarioList(JFrame jf) {
+		criarTela(jf);
 	}
 
-	public void criarTela() {
+	public void criarTela(JFrame jf) {
 		// Criando o objeto da Tela
-		JFrame tela = new JFrame();
+		JDialog tela = new JDialog(jf, true);
 		tela.setSize(500, 500);
-		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tela.setLayout(null);
 		tela.setLocationRelativeTo(null);
 		tela.setTitle("Lista de Funcionários");
@@ -78,6 +81,22 @@ public class FrameFuncionarioList {
 				carregarDados();
 			}
 		});
+		
+		btnSair = new JButton("Sair");
+		btnSair.setBounds(220, 410, 100, 40);
+		
+		btnSair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int resposta = JOptionPane.showConfirmDialog(tela, "Você tem certeza que deseja sair?");
+				
+				if (resposta == 0) {
+					tela.dispose();
+				}
+			}
+		});
 
 		// Criando variável do container da tela
 		Container painel = tela.getContentPane();
@@ -85,6 +104,7 @@ public class FrameFuncionarioList {
 		painel.add(labelTitulo);
 		painel.add(scrollFuncionarios);
 		painel.add(btnCadastro);
+		painel.add(btnSair);
 
 		// "Setando" visibilidade da tela
 		tela.setVisible(true);
