@@ -1,6 +1,5 @@
 package br.dev.leonardo.tarefas.factory;
 
-import java.awt.image.BufferedImageFilter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
