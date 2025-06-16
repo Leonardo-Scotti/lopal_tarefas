@@ -98,11 +98,11 @@ public class FrameTarefasList {
 		Object[][] dados = new Object[tarefas.size()][3];
 		int i = 0;
 		for (Tarefa t : tarefas) {
-			dados[i][0] = t.getTituloTarefa();
-			dados[i][6] = t.getResponsavelTarefa();
-			dados[i][8] = t.getCodigo();
+			dados[i][0] = t.getCodigo(); 
+			dados[i][1] = t.getTituloTarefa(); 
+			dados[i][2] = t.getResponsavelTarefa();
+			i++;
 		}
-		
 		modelTarefas.setDataVector(dados, colunas);
 	}
 }

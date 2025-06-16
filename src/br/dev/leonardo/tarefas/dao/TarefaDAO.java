@@ -55,6 +55,7 @@ public class TarefaDAO {
 					String dataConclusao = tarefasStr[4];
 					String status = tarefasStr[5];
 					String responsavel = tarefasStr[6];
+					String codigo = tarefasStr[7];
 
 					// Criando um objeto Tarefa
 					Tarefa tarefa = new Tarefa();
@@ -64,6 +65,7 @@ public class TarefaDAO {
 					tarefa.setPrazoTarefa(prazo);
 					tarefa.setStatusTarefa(status);
 					tarefa.setResponsavelTarefa(responsavel);
+					tarefa.setCodigo(codigo);
 
 					// Adicionando Funcionários na lista
 					tarefas.add(tarefa);

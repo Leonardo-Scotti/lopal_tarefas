@@ -84,6 +84,10 @@ public class Tarefa {
 	public String getResponsavelTarefa() {
 		return responsavelTarefa;
 	}
+	
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
 	public void setResponsavelTarefa(String responsavelTarefa) {
 		this.responsavelTarefa = responsavelTarefa;
