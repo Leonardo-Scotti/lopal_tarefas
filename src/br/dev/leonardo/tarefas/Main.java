@@ -13,10 +13,12 @@ import java.util.UUID;
 
 import br.dev.leonardo.tarefas.dao.FuncionarioDAO;
 import br.dev.leonardo.tarefas.model.Funcionario;
+import br.dev.leonardo.tarefas.model.Status;
 import br.dev.leonardo.tarefas.model.Tarefa;
 import br.dev.leonardo.tarefas.ui.FrameFuncionario;
 import br.dev.leonardo.tarefas.ui.FrameFuncionarioList;
 import br.dev.leonardo.tarefas.ui.FrameGerenciador;
+import br.dev.leonardo.tarefas.ui.FrameTarefa;
 import br.dev.leonardo.tarefas.ui.FrameTarefasList;
 import br.dev.leonardo.tarefas.utils.Utils;
 
@@ -29,8 +31,9 @@ public class Main {
 //		
 //		System.out.println(t.toString());
 		
-		new FrameGerenciador();
+//		new FrameGerenciador();
 		
+		new FrameTarefa();
 //		new FrameFuncionarioList();
 
 //		FuncionarioDAO dao = new FuncionarioDAO();
