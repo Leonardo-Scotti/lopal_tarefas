@@ -1,6 +1,9 @@
 package br.dev.leonardo.tarefas.dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,11 @@ import br.dev.leonardo.tarefas.model.Funcionario;
 public class FuncionarioDAO {
 	private Funcionario funcionario;
 
+	private FileWriter fw;
+	private BufferedWriter bw;
+	private FileReader fr;
+	private BufferedReader br;
+	
 	public FuncionarioDAO() {
 
 	}
@@ -70,5 +78,37 @@ public class FuncionarioDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public List<Funcionario> getFuncionarios() {
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		
+		try {
+			
+			String linha = "";
+			
+			while((linha = br.readLine()) != null) {
+				String[] funcionarioStr = linha.split(",");
+				
+				if(funcionarioStr.length == 4) {
+					Funcionario f = new Funcionario();
+					
+					f.setMatricula(funcionarioStr[0]);
+					f.setNome(funcionarioStr[1]);
+					f.setCargo(funcionarioStr[2]);
+					double salario = Double.parseDouble(funcionarioStr[3]);
+					f.setSalario(salario);
+					funcionarios.add(f);
+				} else {
+					
+				}
+						
+			}
+			
+		} catch (Exception erro) {
+			erro.printStackTrace();
+		}
+		
+		return funcionarios;
 	}
 }

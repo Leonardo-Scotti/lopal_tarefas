@@ -1,38 +1,20 @@
 package br.dev.leonardo.tarefas.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import br.dev.leonardo.tarefas.utils.Utils;
 
 public class Tarefa {
 	private String tituloTarefa;
 	private String descricaoTarefa;
-	private String dataInicial;
+	private LocalDate dataInicial;
 	private int prazoTarefa;
-	private String dataConclusao;
+	private LocalDate dataConclusao;
 	private String statusTarefa;
 	private String responsavelTarefa;
 	private String codigo;
-	
-	public Tarefa() {
-		
-	}
-	
-	public Tarefa(String tituloTarefa, String descricaoTarefa, LocalDate dataInicial, int prazoTarefa, String statusTarefa, String responsavelTarefa) {
-		this.tituloTarefa = tituloTarefa;
-		this.descricaoTarefa = descricaoTarefa;
-		this.dataInicial = dataInicial.toString();
-		this.prazoTarefa = prazoTarefa;
-		this.statusTarefa = statusTarefa;
-		this.responsavelTarefa = responsavelTarefa;
-		this.codigo = Utils.gerarUUID8();
-		this.dataConclusao = dataInicial.plusDays(prazoTarefa).toString();
-	}
-	
-	public String getCodigo() {
-		return codigo;
-	}
-	
+
 	public String getTituloTarefa() {
 		return tituloTarefa;
 	}
@@ -49,12 +31,13 @@ public class Tarefa {
 		this.descricaoTarefa = descricaoTarefa;
 	}
 
-	public String getDataInicial() {
+	public LocalDate getDataInicial() {
 		return dataInicial;
 	}
 
 	public void setDataInicial(String dataInicial) {
-		this.dataInicial = dataInicial;
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		this.dataInicial = LocalDate.parse(dataInicial, formato);
 	}
 
 	public int getPrazoTarefa() {
@@ -65,12 +48,18 @@ public class Tarefa {
 		this.prazoTarefa = prazoTarefa;
 	}
 
-	public String getDataConclusao() {
+	public LocalDate getDataConclusao() {
 		return dataConclusao;
 	}
 
 	public void setDataConclusao(String dataConclusao) {
-		this.dataConclusao = dataConclusao;
+		LocalDate dataCalc = calcularDataConclusao();
+		
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		String dataFormatada = dataCalc.format(formato);
+		
+		
+		this.dataConclusao = LocalDate.parse(dataFormatada, formato);
 	}
 
 	public String getStatusTarefa() {
@@ -84,18 +73,30 @@ public class Tarefa {
 	public String getResponsavelTarefa() {
 		return responsavelTarefa;
 	}
-	
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
 
 	public void setResponsavelTarefa(String responsavelTarefa) {
 		this.responsavelTarefa = responsavelTarefa;
 	}
-	
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public LocalDate calcularDataConclusao() {
+        if (prazoTarefa > 0) {
+            this.dataConclusao = dataInicial.plusDays(prazoTarefa);
+        }
+        return this.dataConclusao;
+    }
+
 	@Override
 	public String toString() {
-		String tarefa = tituloTarefa + "," + descricaoTarefa + "," + dataInicial + "," + prazoTarefa + "," + dataConclusao + "," + statusTarefa + "," + responsavelTarefa + "," + codigo;
+		String tarefa = tituloTarefa + "," + descricaoTarefa + "," + dataInicial + "," + prazoTarefa + ","
+				+ dataConclusao + "," + statusTarefa + "," + responsavelTarefa + "," + codigo;
 		return tarefa;
 	}
 
