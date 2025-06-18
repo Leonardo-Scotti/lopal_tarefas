@@ -228,6 +228,18 @@ public class FrameTarefa {
 		btnSair = new JButton("Sair");
 		btnSair.setBounds(180, 320, 60, 30);
 
+		btnSair.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int resposta = JOptionPane.showConfirmDialog(tela, "Você tem certeza que deseja sair?");
+
+				if (resposta == 0) {
+					tela.dispose();
+				}
+			}
+		});
+
 		Container painel = tela.getContentPane();
 		painel.add(labelTitulo);
 		painel.add(txtTitulo);

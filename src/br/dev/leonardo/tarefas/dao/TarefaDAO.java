@@ -24,7 +24,6 @@ public class TarefaDAO {
 			FileFactory ff = new FileFactory();
 			ff.getBufferedWriterTarefa().write(tarefa.toString());
 			ff.getBufferedWriterTarefa().flush();
-			System.out.println("Tarefa Cadastrada");
 		} catch (IOException erro) {
 			// TODO: handle exception
 			erro.printStackTrace();

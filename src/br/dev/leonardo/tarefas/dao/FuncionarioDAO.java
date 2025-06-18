@@ -32,7 +32,6 @@ public class FuncionarioDAO {
 			FileFactory ff = new FileFactory();
 			ff.getBufferedWriterFuncionario().write(funcionario.toString());
 			ff.getBufferedWriterFuncionario().flush();
-			System.out.println("Funcionário gravado com sucesso!");
 
 		} catch (IOException erro) {
 			erro.printStackTrace();
