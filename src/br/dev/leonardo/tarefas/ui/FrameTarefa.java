@@ -104,30 +104,51 @@ public class FrameTarefa {
 
 		txtAno = new JTextField();
 		txtAno.setBounds(110, 135, 40, 20);
-		
+
+		DocumentListener dataListener = new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				atualizarDataInicial();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				atualizarDataInicial();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				atualizarDataInicial();
+			}
+		};
+
+		txtDia.getDocument().addDocumentListener(dataListener);
+		txtMes.getDocument().addDocumentListener(dataListener);
+		txtAno.getDocument().addDocumentListener(dataListener);
+
 		carregarDataInicial();
 
-		// PRAZO
+		// ==========PRAZO==========
 		labelPrazo = new JLabel("Prazo (em dias):");
 		labelPrazo.setBounds(200, 110, 200, 30);
 
 		txtPrazo = new JTextField();
 		txtPrazo.setBounds(200, 135, 100, 20);
-		
+
 		txtPrazo.getDocument().addDocumentListener(new DocumentListener() {
-			
+
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				calcularDataConclusao();
 			}
-			
+
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				calcularDataConclusao();
 			}
-			
+
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
@@ -135,15 +156,15 @@ public class FrameTarefa {
 			}
 		});
 
-		// DATA CONCLUSÃO
+		// ==========DATA CONCLUSÃO==========
 		labelDataConclusao = new JLabel("Data de Conclusão:");
 		labelDataConclusao.setBounds(20, 155, 200, 30);
 
 		txtDataConclusao = new JTextField();
 		txtDataConclusao.setBounds(20, 180, 200, 20);
-		txtDataConclusao.enable(false);
+		// txtDataConclusao.enable(false);
 
-		// STATUS
+		// ==========STATUS=========
 		labelStatus = new JLabel("Status:");
 		labelStatus.setBounds(20, 200, 200, 30);
 
@@ -152,7 +173,7 @@ public class FrameTarefa {
 
 		carregarStatus();
 
-		// RESPONSÁVEL
+		// ==========RESPONSÁVEL==========
 		labelResponsavel = new JLabel("Responsável:");
 		labelResponsavel.setBounds(20, 245, 200, 30);
 
@@ -160,7 +181,7 @@ public class FrameTarefa {
 		comboResponsavel.setBounds(20, 270, 200, 20);
 		carregarResponsavel();
 
-		// BOTÃO CADASTRAR
+		// ==========BOTÃO CADASTRAR==========
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(60, 320, 100, 30);
 
@@ -168,26 +189,36 @@ public class FrameTarefa {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				responsavelSelecionado = (String) comboResponsavel.getSelectedItem();
 				statusSelecionado = (Status) comboStatus.getSelectedItem();
+
+				// Verificando campos nulos
 				if (txtTitulo.getText().trim().isEmpty() || txtDescricao.getText().trim().isEmpty()
 						|| txtDia.getText().trim().isEmpty() || txtMes.getText().trim().isEmpty()
 						|| txtAno.getText().trim().isEmpty() || txtPrazo.getText().trim().isEmpty()
 						|| responsavelSelecionado == null || statusSelecionado == null) {
 					JOptionPane.showMessageDialog(tela, "*Todos os campos devem ser preenchidos!");
 				} else {
-					try {
-						try {
-						
-						} catch (NumberFormatException erro) {
-							JOptionPane.showMessageDialog(tela, "Preencha corretamente os campos da data de início!");
-						}
-						
-						calcularDataConclusao();
-					} catch (Exception e2) {
-						// TODO: handle exception
-					}
+					// Armazenando conteúdo em tipos necessários
+					String titulo = txtTitulo.getText();
+					String descricao = txtDescricao.getText();
+					String inicial = dataInicial;
+					int prazo = Integer.parseInt(txtPrazo.getText());
+					String conclusao = txtDataConclusao.getText();
+					String status = statusSelecionado.toString();
+					String responsavel = responsavelSelecionado;
+
+					// Criando tarefa e passando parâmetros necessários
+					Tarefa t = new Tarefa(titulo, descricao, inicial, prazo, conclusao, status, responsavel);
+
+					// Gravando tarefa no arquivo
+					TarefaDAO dao = new TarefaDAO(t);
+					dao.gravar();
+
+					// Mensagem para usuário
+					JOptionPane.showMessageDialog(tela, titulo + "\ncadastrado com sucesso!", "Sucesso",
+							JOptionPane.INFORMATION_MESSAGE);
 
 				}
 			}
@@ -243,19 +274,38 @@ public class FrameTarefa {
 			comboStatus.addItem(estado);
 		}
 	}
-	
+
 	private void carregarDataInicial() {
-		String dia = txtDia.getText();
-		String mes = txtMes.getText();
-		String ano = txtAno.getText();
-		
-		dataInicial = dia + "/" + mes + "/" + ano;
+		Calendar cal = Calendar.getInstance();
+		txtDia.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+		txtMes.setText(String.valueOf(cal.get(Calendar.MONTH) + 1));
+		txtAno.setText(String.valueOf(cal.get(Calendar.YEAR)));
+		atualizarDataInicial();
+	}
+
+	private void atualizarDataInicial() {
+		String dia = txtDia.getText().trim();
+		String mes = txtMes.getText().trim();
+		String ano = txtAno.getText().trim();
+
+		if (!dia.isEmpty() && !mes.isEmpty() && !ano.isEmpty()) {
+			dataInicial = dia + "/" + mes + "/" + ano;
+		}
 	}
 
 	private void calcularDataConclusao() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		try {
+			// Atualiza a data inicial antes de calcular
+			atualizarDataInicial();
+
+			// Verifica se a data inicial está vazia
+			if (dataInicial.isEmpty()) {
+				txtDataConclusao.setText("");
+				return;
+			}
+
 			// obter data inicial
 			Date dateDataInicial = sdf.parse(dataInicial);
 

@@ -17,7 +17,7 @@ public class Tarefa {
 	}
 
 	public Tarefa(String tituloTarefa, String descricaoTarefa, String dataInicial, int prazoTarefa,
-			String dataConclusao, String statusTarefa, String responsavelTarefa, String codigo) {
+			String dataConclusao, String statusTarefa, String responsavelTarefa) {
 		this.tituloTarefa = tituloTarefa;
 		this.descricaoTarefa = descricaoTarefa;
 		this.dataInicial = dataInicial;
