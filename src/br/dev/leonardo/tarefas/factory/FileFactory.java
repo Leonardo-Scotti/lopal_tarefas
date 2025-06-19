@@ -5,13 +5,14 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class FileFactory {
 	//private String arquivoFuncionario = "C:\\Users\\25132821\\ProjetoTarefas\\funcionarios.csv";
-	private String arquivoFuncionario = "C:\\Users\\Scotti\\ProjetoTarefas\\funcionarios.csv";
+	private String arquivoFuncionario = Paths.get("db", "funcionarios.csv").toString();
 	
 	//private String arquivoTarefa = "C:\\Users\\25132821\\ProjetoTarefas\\tarefas.csv";
-	private String arquivoTarefa = "C:\\Users\\Scotti\\ProjetoTarefas\\tarefas.csv";
+	private String arquivoTarefa = Paths.get("db", "tarefas.csv").toString();
 
 	//Funcionario
 	private FileWriter fwf;

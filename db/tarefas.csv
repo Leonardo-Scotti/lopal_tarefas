@@ -1,0 +1,5 @@
+nome,descrição,dataInicial,prazo,dataConclusão,status,responsável,código
+Lavar o chão,O funcionário deve lavar o chão,18/6/2025,1,19/06/2025,EM_ANDAMENTO,Thalita,a3c32bce
+Fazer pipoca,O funcionário deve fazer a pipoca,20/6/2025,10,30/06/2025,NÃO_INICIADO,Thalita,9eac01fd
+Fazer a massa,O funcionário deve fazer a massa ,19/6/2025,1,20/06/2025,NÃO_INICIADO,Carlos,3f1ae412
+Gerenciar projeto,O funcionário deve gerenciar os projetos,19/6/2025,5,24/06/2025,EM_ANDAMENTO,Leonardo,b28d89c2
